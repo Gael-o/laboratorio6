@@ -63,8 +63,10 @@ fun AvisosScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onPublicar) {
-                Icon(Icons.Default.Add, contentDescription = "Publicar aviso")
+            if (sesion.puedePublicar) {
+                FloatingActionButton(onClick = onPublicar) {
+                    Icon(Icons.Default.Add, contentDescription = "Publicar aviso")
+                }
             }
         }
     ) { padding ->
@@ -116,7 +118,7 @@ private fun AvisosPreview() {
 private fun AvisosErrorPreview() {
     AvisosTheme {
         AvisosScreen(
-            sesion = demoSesion.copy(usuario = "a01234567", rol = Rol.ALUMNO),
+            sesion = demoSesion.copy(usuario = "a01234567", Rol.ALUMNO),
             avisos = UiState.Error("No hay conexión. Revisa tu internet."),
             onRecargar = {}, onPublicar = {}, onSalir = {}
         )
